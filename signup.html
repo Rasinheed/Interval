@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Interval - Signup</title>
+
+  <!-- Load saved theme BEFORE CSS so all pages stay synced -->
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+
+  <link rel="stylesheet" href="authstyle.css">
+</head>
+
+<body>
+
+<div class="auth-logo-fixed">
+  <img id="interval-logo" src="logodark.png" alt="Interval Logo">
+</div>
+
+<!-- Theme Toggle Button -->
+<button id="theme-toggle" class="theme-toggle">
+  <span>☀️</span>
+</button>
+
+<div class="auth-container">
+  <h1>Welcome To Interval!</h1>
+  <h3>Create An Account To Get Started...</h3>
+
+  <form id="signup-form">
+
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Choose a Username..." required>
+    <div class="error-message">This field is required</div>
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Your Email..." required>
+    <div class="error-message">This field is required</div>
+
+    <label>Password</label>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Create a Password..." required>
+      <span class="toggle-eye" data-target="password">👁️</span>
+    </div>
+    <div class="caps-warning" id="caps-warning-password">Caps Lock is ON</div>
+    <div class="error-message">This field is required</div>
+
+    <label>Confirm Password</label>
+    <div class="input-group">
+      <input type="password" id="confirm-password" placeholder="Confirm Your Password..." required>
+      <span class="toggle-eye" data-target="confirm-password">👁️</span>
+    </div>
+    <div class="caps-warning" id="caps-warning-confirm">Caps Lock is ON</div>
+    <div class="error-message">This field is required</div>
+    <br>
+    <button type="submit">Sign Up</button>
+
+    <p style="margin-top: 15px; text-align:center;">
+    Once you have created your Interval account you need to
+    <a href="login.html" style= "font-weight: 600;">
+    click here to login.
+    </a>
+    </p>
+
+  </form>
+</div>
+
+<!-- Theme Toggle Script -->
+<script>
+  const toggle = document.getElementById('theme-toggle');
+
+  const currentThemeOnLoad = document.documentElement.getAttribute('data-theme');
+  toggle.textContent = currentThemeOnLoad === 'dark' ? "🌙" : "☀️";
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+
+    toggle.textContent = next === 'dark' ? "🌙" : "☀️";
+  });
+</script>
+
+<!-- Background Shapes Container -->
+<div class="background-shapes"></div>
+
+<!-- Falling Shapes Script -->
+<script>
+  const container = document.querySelector('.background-shapes');
+  const colors = ["#5e17eb", "#5170ff"];
+  const shapes = ["circle", "square", "triangle"];
+
+  function createShape() {
+    const shape = document.createElement("div");
+    shape.classList.add("shape");
+
+    const size = Math.random() * 16 + 6;
+    shape.style.width = `${size}px`;
+    shape.style.height = `${size}px`;
+
+    shape.style.left = Math.random() * 100 + "vw";
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    shape.style.background = color;
+
+    const duration = Math.random() * 6 + 4;
+    shape.style.animationDuration = duration + "s";
+
+    const type = shapes[Math.floor(Math.random() * shapes.length)];
+
+    if (type === "circle") {
+      shape.style.borderRadius = "50%";
+    }
+
+    if (type === "triangle") {
+      shape.style.width = 0;
+      shape.style.height = 0;
+      shape.style.borderLeft = `${size}px solid transparent`;
+      shape.style.borderRight = `${size}px solid transparent`;
+      shape.style.borderBottom = `${size * 1.5}px solid ${color}`;
+      shape.style.background = "none";
+    }
+
+    container.appendChild(shape);
+
+    setTimeout(() => shape.remove(), duration * 1000);
+  }
+
+  setInterval(createShape, 400);
+</script>
+
+<!-- Custom Validation Script -->
+<script>
+  const form = document.getElementById("signup-form");
+
+  form.addEventListener("submit", function (e) {
+    let valid = true;
+
+    document.querySelectorAll("input").forEach(input => {
+      const error = input.nextElementSibling;
+      if (!input.checkValidity()) {
+        error.style.display = "block";
+        valid = false;
+      } else {
+        error.style.display = "none";
+      }
+    });
+
+    const pass = document.getElementById("password");
+    const confirm = document.getElementById("confirm-password");
+
+    if (pass.value !== confirm.value) {
+      confirm.nextElementSibling.textContent = "Passwords do not match";
+      confirm.nextElementSibling.style.display = "block";
+      valid = false;
+    }
+
+    if (!valid) e.preventDefault();
+  });
+</script>
+
+<!-- FIREBASE SIGNUP SYSTEMS -->
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { 
+    getAuth, 
+    createUserWithEmailAndPassword 
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { 
+    getFirestore, 
+    setDoc, 
+    doc 
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCZDYABh07f_sqy3ebqX6UJ3LYZyiDemPA",
+    authDomain: "interval-2f3b8.firebaseapp.com",
+    projectId: "interval-2f3b8",
+    storageBucket: "interval-2f3b8.firebasestorage.app",
+    messagingSenderId: "655152534778",
+    appId: "1:655152534778:web:bef646f5f5d418e1896543",
+    measurementId: "G-92CW9X90Q0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const signupForm = document.getElementById("signup-form");
+
+  signupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let valid = true;
+
+    // Validate all inputs
+    document.querySelectorAll("input").forEach(input => {
+      const error = input.nextElementSibling;
+      if (!input.checkValidity()) {
+        error.style.display = "block";
+        valid = false;
+      } else {
+        error.style.display = "none";
+      }
+    });
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm-password").value;
+
+    // Password match check
+    if (password !== confirm) {
+      const error = document.getElementById("confirm-password").nextElementSibling;
+      error.textContent = "Passwords do not match";
+      error.style.display = "block";
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    try {
+      // Create user
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCred.user;
+
+      // Save user data
+      await setDoc(doc(db, "users", user.uid), {
+        username: username,
+        email: email,
+        createdAt: Date.now()
+      });
+
+      // Success message + redirect
+      alert("Account created successfully! Please log in.");
+      window.location.href = "login.html";
+
+    } catch (err) {
+      console.error(err);
+      alert("Signup failed: " + err.message);
+    }
+  });
+</script>
+
+<script>
+  document.querySelectorAll(".toggle-eye").forEach(eye => {
+    eye.addEventListener("click", () => {
+      const targetId = eye.getAttribute("data-target");
+      const input = document.getElementById(targetId);
+
+      const isHidden = input.type === "password";
+      input.type = isHidden ? "text" : "password";
+
+      // Change icon
+      eye.textContent = isHidden ? "🙈" : "👁️";
+    });
+  });
+</script>
+
+<script>
+  function setupCapsWarning(inputId, warningId) {
+    const input = document.getElementById(inputId);
+    const warning = document.getElementById(warningId);
+
+    input.addEventListener("keyup", (e) => {
+      if (e.getModifierState("CapsLock")) {
+        warning.style.display = "block";
+      } else {
+        warning.style.display = "none";
+      }
+    });
+
+    input.addEventListener("blur", () => {
+      warning.style.display = "none";
+    });
+  }
+
+  setupCapsWarning("password", "caps-warning-password");
+  setupCapsWarning("confirm-password", "caps-warning-confirm");
+</script>
+
+</body>
+</html>

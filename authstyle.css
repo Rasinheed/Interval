@@ -1,0 +1,421 @@
+/* ================================
+   Interval Theme System
+   Light + Dark Mode Palettes
+   ================================ */
+
+/* ---------- Light Mode ---------- */
+:root {
+  --bg: #F7F7F5;
+  --surface: #FFFFFF;
+
+  --text-primary: #1A1A1A;
+  --text-secondary: #5A5A5A;
+
+  --accent: #5e17eb;
+  --accent-hover: #5170ff;
+
+  --border: #E2E2DF;
+
+  --success: #4CAF50;
+  --error: #E57373;
+}
+
+/* ---------- Dark Mode ---------- */
+[data-theme="dark"] {
+  --bg: #0F1115;
+  --surface: #1A1D22;
+
+  --text-primary: #F2F2F2;
+  --text-secondary: #A8A8A8;
+
+  --accent: #5e17eb;
+  --accent-hover: #6495ED;
+
+  --border: #2A2D33;
+
+  --success: #66BB6A;
+  --error: #EF9A9A;
+}
+
+/* ---------- Base Styles ---------- */
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: system-ui, sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* ---------- Buttons (Login/Signup buttons) ---------- */
+button:not(.theme-toggle) {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+button:not(.theme-toggle):hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- Auth Container ---------- */
+.auth-container {
+  max-width: 360px;
+  width: 100%;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+
+  position: relative;
+  z-index: 2;
+}
+
+.auth-container h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+}
+
+.auth-container h3 {
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* ---------- Form Elements ---------- */
+form {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---------- Custom Required Field Error Messages ---------- */
+input:invalid {
+  box-shadow: none;
+}
+
+input:invalid:focus {
+  outline: none;
+}
+
+.error-message {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--error);
+  margin-bottom: 0.8rem;
+}
+
+/* ---------- Login/Signup Switch Link ---------- */
+.switch-auth {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.switch-auth a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.switch-auth a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Theme Toggle (TOP RIGHT) ---------- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;     /* ← back to top-right */
+  font-size: 34px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.25s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.theme-toggle:hover {
+  opacity: 0.7;
+}
+
+.theme-toggle span {
+  font-size: 30px;
+  line-height: 1;
+  display: block;
+}
+
+/* ---------- Falling Background Shapes ---------- */
+.background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  top: -10vh;
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  opacity: 0.25;
+  border-radius: 8px;
+  animation: fall var(--duration, 10s) linear infinite;
+}
+
+/* Falling animation */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* =========================================================
+   INTERVAL BUTTON MECHANICS (Login + Signup)
+========================================================= */
+
+/* Base transition upgrades */
+button:not(.theme-toggle) {
+  transition: background 0.25s ease,
+              transform 0.2s ease,
+              box-shadow 0.25s ease;
+}
+
+/* Blue glow + scale hover */
+button:not(.theme-toggle):hover {
+  background: var(--accent-hover);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(81, 112, 255, 0.55);
+}
+
+/* ============================================
+   INTERVAL TYPOGRAPHY — LOGIN + SIGNUP PAGES
+============================================ */
+
+:root {
+  --font-heading: 'Urbanist', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* Headings */
+.auth-container h1 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 2.6rem;
+  letter-spacing: -0.5px;
+}
+
+.auth-container h3 {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+/* Labels */
+.auth-container label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+.auth-container input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* Buttons */
+.auth-container button[type="submit"] {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+}
+
+/* Bottom links */
+.auth-container p,
+.auth-container a {
+  font-family: var(--font-body);
+}
+
+/* ============================================
+   INTERVAL AUTH PAGE TYPOGRAPHY FIX
+   (Overrides chat-scale typography)
+============================================ */
+
+.auth-container h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.auth-container h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.auth-container label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.auth-container input {
+  font-size: 0.95rem;
+  padding: 10px 12px;
+}
+
+.auth-container button[type="submit"] {
+  font-size: 1rem;
+  padding: 12px 18px;
+  border-radius: 8px;
+}
+
+.auth-container p {
+  font-size: 0.9rem;
+}
+
+.auth-container a {
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   INTERVAL AUTH LINK STYLE — TEXT BLUE + GLOW
+============================================ */
+
+.switch-auth a,
+.auth-container a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
+}
+
+.switch-auth a:hover,
+.auth-container a:hover {
+  color: var(--accent-hover); /* bright Interval blue */
+  text-shadow: 0 0 10px rgba(81,112,255,0.65); /* glowing blue aura */
+}
+
+/* ============================================
+   INTERVAL LOGO — TOP LEFT FIXED
+============================================ */
+
+.auth-logo-fixed {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.auth-logo-fixed img {
+  width: 200px;   /* clean size */
+  height: auto;
+  filter: none;   /* no glow */
+  transition: transform 0.25s ease;
+}
+
+.auth-logo-fixed img:hover {
+  transform: scale(1.04); /* subtle hover */
+}
+/* Default = Light Mode */
+#interval-logo {
+  content: url("logolight.png");
+}
+
+/* Dark Mode */
+[data-theme="dark"] #interval-logo {
+  content: url("logodark.png");
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  user-select: none;
+  font-size: 18px;
+}
+
+.toggle-eye:hover {
+  opacity: 1;
+}
+
+.caps-warning {
+  display: none;
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 600;
+}

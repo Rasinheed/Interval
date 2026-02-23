@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Interval - Home</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="homestyle.css">
+
+  <!-- UI script -->
+  <script src="homescriptUI.js" defer></script>
+</head>
+
+<body>
+
+<!-- splash screen -->
+<div id="splash-screen">
+  <img id="splash-logo" alt="Interval Logo">
+</div>
+
+<!-- background shapes -->
+<div class="background-shapes"></div>
+
+<!-- theme toggle -->
+<button id="theme-toggle" class="theme-toggle">
+  <span>☀️</span>
+</button>
+
+<!-- top logo -->
+<div class="top-logo">
+  <img id="home-logo" alt="Interval Logo">
+</div>
+
+<!-- main wrapper -->
+<div class="center-wrapper">
+
+  <!-- friends menu -->
+  <div class="friends-menu">
+
+      <!-- switcher -->
+      <div class="switcher">
+          <button id="prevBtn" class="arrow">&lt;</button>
+          <div id="switchTitle">Friends</div>
+          <button id="nextBtn" class="arrow">&gt;</button>
+      </div>
+
+      <!-- content panels -->
+      <div class="content">
+
+          <!-- friends panel -->
+          <div class="panel" id="friendsPanel">
+
+              <div class="friend">
+                  <div class="pfp online"></div>
+                  <div class="info">
+                      <p class="name">Retard Ronan</p>
+                      <p class="status">Online</p>
+                  </div>
+              </div>
+
+              <div class="friend">
+                  <div class="pfp offline"></div>
+                  <div class="info">
+                      <p class="name"></p>
+                      <p class="status">Last seen 2h ago</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- suggested panel -->
+          <div class="panel hidden" id="suggestedPanel">
+
+              <input type="text" placeholder="Search..." class="searchBox" style="margin-bottom: 15px;">
+
+              <h3>Suggested Friends</h3>
+
+              <div class="friend">
+                  <div class="pfp"></div>
+                  <div class="info">
+                      <p class="name">Alex</p>
+                      <p class="status">3 mutual friends</p>
+                  </div>
+                  <button class="add-btn">Add</button>
+              </div>
+
+          </div>
+
+          <!-- requests panel -->
+          <div class="panel hidden" id="requestsPanel">
+
+              <h3>Incoming Requests</h3>
+
+              <div class="friend">
+                  <div class="pfp"></div>
+                  <div class="info">
+                      <p class="name">Chris</p>
+                      <p class="status">Sent you a request</p>
+                  </div>
+                  <button class="accept">✓</button>
+                  <button class="decline">✕</button>
+              </div>
+
+              <h3>Outgoing Requests</h3>
+
+              <div class="friend">
+                  <div class="pfp"></div>
+                  <div class="info">
+                      <p class="name">Morgan</p>
+                      <p class="status">Pending...</p>
+                  </div>
+                  <button class="decline">Cancel</button>
+              </div>
+
+          </div>
+
+      </div>
+
